@@ -1,18 +1,18 @@
 // @flow
 import React, { Component } from 'react';
-import { BrowserRouter, Match, Miss } from 'react-router';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../Home';
 import NotFound from '../../components/NotFound';
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div>
-          <Match exactly pattern="/" Component={Home} />
-          <Miss component={NotFound} />
-        </div>
-      </BrowserRouter>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Router>
     );
   }
 }
