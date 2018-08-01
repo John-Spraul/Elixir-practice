@@ -25,14 +25,14 @@ defmodule App.User do
     struct
     |> changeset(params)
     |> cast(params, [:password])
-    |> validate_length(:password, min:6, max: 100)
+    |> validate_length(:password, min: 6, max: 100)
     |> put_password_hash()
   end
 
   defp put_password_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
-        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+        put_change(changeset, :password_hash, Comeonin.Pbkdf2.hashpwsalt(password))
       _ ->
         changeset
     end
