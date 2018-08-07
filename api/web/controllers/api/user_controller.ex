@@ -13,11 +13,11 @@ defmodule App.UserController do
 
         new_conn
         |> put_status(:created)
-        |> render(Sling.SessionView, "show.json", user: user, jwt: jwt)
+        |> render(App.SessionView, "show.json", user: user, jwt: jwt)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Sling.ChangesetView, "error.json", changeset: changeset)
+        |> render(App.ChangesetView, "error.json", changeset: changeset)
       end
     end
   end
